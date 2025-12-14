@@ -1,0 +1,77 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+/public/tinymce/
+
+# Environment files
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+*.log.*
+log.txt
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.sw?
+
+# Build output
+dist/
+build/
+out/
+.next/
+.cache/
+coverage/
+
+# Testing
+coverage/
+jest-cache/
+jest-test-results.json
+test-results.xml
+
+# Typescript
+*.tsbuildinfo
+
+# ESLint / Prettier / Stylelint
+.eslintcache
+.prettiercache
+
+# VS Code settings (optional)
+.vscode/
+
+# Optional bundler specific
+.cache/
+*.parcel-cache/
+turbo/
+.storybook-out/
+
+# Others
+*.local
+*.swo
+*.swp
+*.tgz
+*.log
+
+# Custom
+tmp/
+temp/
+
+.prettierrc
+.npmrcEWA
+
+.npmrc

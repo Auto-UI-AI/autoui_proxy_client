@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@plugin './hero.ts';
+
+@theme {
+    --default-font-family: "Inter";
+    --default-font-feature-settings: "cv04", "cv03", "cv01", "cv09", "cv02";
+}
+
+body {
+    margin: 0 !important;
+}
+
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@source "../index.html";
+@source "./src/**/*.{js,ts,jsx,tsx}";
+@source "../node_modules/xcomp/dist/**/*.{js,ts,jsx,tsx}";
