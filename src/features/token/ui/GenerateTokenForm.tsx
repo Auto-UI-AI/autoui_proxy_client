@@ -17,7 +17,6 @@ export function GenerateTokenForm() {
     const canSubmit = useMemo(() => appId.trim().length > 0 && !loading, [appId, loading]);
 
     useEffect(() => {
-        // підтягуємо список при відкритті сторінки
         dispatch(fetchTokensThunk(appId));
     }, [dispatch, appId]);
 
@@ -45,7 +44,7 @@ export function GenerateTokenForm() {
                     onPress={async () => {
                         dispatch(tokenActions.clearGeneratedSecret());
                         await dispatch(generateTokenThunk({ appId, label: label || undefined }));
-                        // рефетч list
+                      
                         dispatch(fetchTokensThunk(appId));
                         setLabel("");
                     }}
