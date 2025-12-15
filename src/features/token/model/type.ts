@@ -11,7 +11,7 @@ export type TokenState = {
 
 export type TokenWithApiKeyState = {
     appId: string;
-    apiKey?: string;
+    apiKey: string;
     items: TokenItem[];
     loading: boolean;
     error?: string;

@@ -4,10 +4,11 @@ import { fetchTokensThunk } from "./services/fetchTokensThunk";
 import { generateTokenThunk } from "./services/generateTokenThunk";
 import { revokeTokenThunk } from "./services/revokeTokenThunk";
 import { set } from "zod";
+import { generateNewApiKeyTokenAppThunk } from "./services/generateNewApiKeyTokenAppThunk";
 
 const initialState: TokenWithApiKeyState = {
     appId: "tasks-demo",
-    apiKey: undefined,
+    apiKey: '',
     items: [],
     loading: false,
 };
@@ -69,8 +70,23 @@ const slice = createSlice({
             .addCase(revokeTokenThunk.rejected, (s, a) => {
                 s.loading = false;
                 s.error = a.error.message || "Failed to revoke token";
+            })
+            .addCase(generateNewApiKeyTokenAppThunk.pending, (s) => {
+            s.loading = true;
+            s.error = undefined;
+            s.generatedSecret = undefined;
+            })
+            .addCase(generateNewApiKeyTokenAppThunk.fulfilled, (s, a) => {
+            s.loading = false;
+            s.generatedSecret = a.payload.secret;
+            // you might also want to set s.appId = ??? if your API returns it
+            // if (a.payload.refetch) you can trigger a fetchTokensThunk from the UI
+            })
+            .addCase(generateNewApiKeyTokenAppThunk.rejected, (s, a) => {
+            s.loading = false;
+            s.error = a.error.message || "Failed to create app + token";
             });
-    },
+            },
 });
 
 export const tokenWithApiKeyReducer = slice.reducer;

@@ -1,10 +1,10 @@
-import { createTokenWithApikey } from "@/shared/api/tokenApi";
+import { createNewApiKeyTokenApp } from "@/shared/api/appsApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const generateNewApiKeyTokenAppThunk = createAsyncThunk(
-    "token/generate",
-    async (payload: { appId: string; apiKey?:string; label?: string}) => {
-        const res = await createTokenWithApikey(payload);
+    "app/generateNewAppWithApiKey",
+    async (payload: { appId: string; name:string; apiKey:string; policy?: any}) => {
+        const res = await createNewApiKeyTokenApp(payload);
         return { secret: res.token, refetch: true };
     }
 );

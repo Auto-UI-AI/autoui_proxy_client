@@ -6,13 +6,13 @@ import { tokenWithApiKeyActions } from "@/features/token/model/tokenWithApiKeySl
 import { CopyableSecret } from "@/shared/ui/CopyableSecret";
 import {selectTokenWithApiKeyState } from "../model/selectors";
 import { fetchTokensThunk } from "../model/services/fetchTokensThunk";
-import { generateTokenForApiKeyThunk } from "../model/services/generateTokenForApiKeyThunk";
+import { generateNewApiKeyTokenAppThunk } from "../model/services/generateNewApiKeyTokenAppThunk";
 
 export function GenerateTokenWithApiKeyForm() {
     const dispatch = useDispatch<AppDispatch>();
     const { appId, apiKey, loading, generatedSecret, error } = useSelector(selectTokenWithApiKeyState);
 
-    const [label, setLabel] = useState<string>("");
+    const [name, setName] = useState<string>("");
 
     const canSubmit = useMemo(() => appId.trim().length > 0 && !loading, [appId, loading]);
 
@@ -35,9 +35,9 @@ export function GenerateTokenWithApiKeyForm() {
                 placeholder="sk-xxxxxxxxxxxxxxxxxxxx"
             />  
             <Input
-                label="Label (optional)"
-                value={label}
-                onChange={(e) => setLabel(e.target.value)}
+                label="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="My laptop"
             />
             
@@ -48,10 +48,10 @@ export function GenerateTokenWithApiKeyForm() {
                     isDisabled={!canSubmit}
                     onPress={async () => {
                         dispatch(tokenWithApiKeyActions.clearGeneratedSecret());
-                        await dispatch(generateTokenForApiKeyThunk({ appId, apiKey, label: label || undefined }));
+                        await dispatch(generateNewApiKeyTokenAppThunk({ appId, name, apiKey }));
                       
                         dispatch(fetchTokensThunk(appId));
-                        setLabel("");
+                        setName("");
                     }}
                 >
                     Generate token
