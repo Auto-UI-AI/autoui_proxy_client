@@ -10,6 +10,10 @@ export async function createToken(payload: { appId: string; label?: string }) {
     const { data } = await api.post<TokenCreateResponse>(`/ui/tokens`, payload);
     return data;
 }
+export async function createTokenWithApikey(payload: { appId: string; apiKey?:string; label?: string }) {
+    const { data } = await api.post<TokenCreateResponse>(`/ui/apikeytokens`, payload);
+    return data;
+}
 
 export async function revokeToken(tokenId: string) {
     await api.delete(`/ui/tokens/${tokenId}`);
